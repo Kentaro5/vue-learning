@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue.jsでフックs</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <p>{{count}}</p>
+            <p>{{ message }}</p>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: function () {
+                    return {
+                        count: 0,
+                        timerId: null,
+                        messagePrefix: 'Hello'
+                    }
+                },
+                computed: {
+                    message: function () {
+                        //
+                        var timestamp = Date.now()
+                        return this.messagePrefix + ', ' + timestamp
+                    }
+                },
+                created: function () {
+                    console.log('created')
+                    var that = this
+                    //データを参照できる。
+                    console.log(this.count)
+                    //DOM  要素が紐付いいないので、undefined
+                    console.log(this.$el)
+                    //　タイマー処理を開始する
+                    this.timerId = setInterval(function () {
+                        that.count += 1
+                    }, 1000)
+                },
+                mounted: function () {
+                    console.log('mounted')
+                    //DOM要素が紐付いている。
+                    console.log(this.$el)
+                },
+                beforeDestory: function () {
+                    console.log('beforeDestroy')
+                    //タイマーの後始末を行う
+                    clearInterval(this.timerId)
+                }
+            })
+            window.vm = vm
+        </script>
+    </body>
+
+</html>
