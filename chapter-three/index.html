@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="fruits-list">
+            <fruits-list-title></fruits-list-title>
+            <input-date-with-today></input-date-with-today>
+        </div>
+
+        <script type='text/x-template' id="fruits-list-title2"></script>
+        <h1>フルーツ一覧22</h1>
+        <script>
+            Vue.component('input-date-with-today', {
+                tempalte: '<h1>フルーツ一覧</h1>',
+                data: function () {
+                    return {
+                        fruits: ['りんご', 'みかん']
+                    }
+                }
+            })
+            Vue.component('input-date-with-today', {
+                render: function (createElement) {
+                    return createElement(
+                        'input',
+                        {
+                            attrs: {
+                                type: 'date',
+                                value: new Date().toISOString().substring(0, 10)
+                            }
+                        }
+                    )
+                }
+
+            })
+            Vue.component('fruits-list-title2', {
+                template: '#fruits-list-title2'
+            })
+            var FruitsListTitle = Vue.extend({
+
+                template: '<h1>フルーツ一覧</h1>'
+
+            })
+
+            new Vue({
+                el: '#fruits-list',
+                components: {
+                    'fruits-list-title': FruitsListTitle
+                }
+            })
+
+        </script>
+    </body>
+
+</html>

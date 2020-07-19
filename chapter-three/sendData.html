@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <ol>
+                <fruits-item-name v-for="fruit222 in fruitsItem" :key="fruit222.name" :item22-name="fruit222">
+                </fruits-item-name>
+            </ol>
+        </div>
+        <script>
+            Vue.component('fruits-item-name', {
+                props: {
+                    item22Name: {
+                        type: Object,
+                        required: true
+                    }
+                },
+                template: '<li>{{ item22Name.name }}</li>'
+            })
+
+            new Vue({
+                el: '#app',
+                data: {
+                    fruitsItem: [
+                        { name: 'いちご' },
+                        { name: 'なし' }
+                    ]
+                }
+            })
+        </script>
+    </body>
+
+</html>
